@@ -9,14 +9,3 @@ process.stdin.on('data', (data) => {
 process.on('exit', () => {
   console.log('This important software is now closing');
 });
-
-// process.stdout.write("welcome onboard\ntype in something\n");
-// process.stdin.on('data', (data)=>{
-//     const fortm = data.toString().trim();
-    // console.log(`Your name is: ${dem}`);
-    // process.stdout.write(`Your name is: ${ fortm }\n`);
-    // process.exit();
-// });
-// process.on('exit', ()=>{
-    // console.log("you're leaving this great app");
-// })
