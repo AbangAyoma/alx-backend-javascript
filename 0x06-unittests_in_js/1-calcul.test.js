@@ -4,7 +4,7 @@ const calculateNumber = require('./1-calcul.js');
 describe('calculateNumber', () => {
   it('should return the sum when type is SUM', () => {
     assert.strictEqual(calculateNumber('SUM', 1.4, 4.5), 6);
-    assert.strictEqual(calculateNumber('SUM', -1.4, 4.5), 3);
+    assert.strictEqual(calculateNumber('SUM', -1.4, 4.5), 4);
   });
 
   it('should return the difference when type is SUBTRACT', () => {
