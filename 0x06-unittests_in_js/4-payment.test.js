@@ -1,39 +1,40 @@
 const sinon = require('sinon');
 const { expect } = require('chai');
 const Utils = require('./utils');
-const sendPaymentRequestToApi = require('./3-payment');
+const sendPaymentRequestToApi = require('./4-payment');
 
 describe('sendPaymentRequestToApi', () => {
-  let spy;
+  let stub;
+  let consoleSpy;
 
   beforeEach(() => {
-    // Create a spy for Utils.calculateNumber
-    spy = sinon.spy(Utils, 'calculateNumber');
+    // Stub the Utils.calculateNumber function
+    stub = sinon.stub(Utils, 'calculateNumber').returns(10);
+
+    // Spy on console.log
+    consoleSpy = sinon.spy(console, 'log');
   });
 
   afterEach(() => {
-    // Restore the spy after each test
-    spy.restore();
+    // Restore the stub and spy after each test
+    stub.restore();
+    consoleSpy.restore();
   });
 
-  it('should call Utils.calculateNumber with SUM, 100, 20', () => {
+  it('should call Utils.calculateNumber with type SUM, 100, 20', () => {
     sendPaymentRequestToApi(100, 20);
 
-    // Assert that Utils.calculateNumber was called once
-    expect(spy.calledOnce).to.be.true;
+    // Verify the stub was called once
+    expect(stub.calledOnce).to.be.true;
 
-    // Assert that Utils.calculateNumber was called with the correct arguments
-    expect(spy.calledWith('SUM', 100, 20)).to.be.true;
+    // Verify the stub was called with the correct arguments
+    expect(stub.calledWith('SUM', 100, 20)).to.be.true;
   });
 
   it('should log the correct total', () => {
-    const consoleSpy = sinon.spy(console, 'log');
     sendPaymentRequestToApi(100, 20);
 
-    // Assert that console.log was called with the correct total
-    expect(consoleSpy.calledWith('The total is: 120')).to.be.true;
-
-    // Restore console.log
-    consoleSpy.restore();
+    // Verify console.log was called with the correct message
+    expect(consoleSpy.calledWith('The total is: 10')).to.be.true;
   });
 });
